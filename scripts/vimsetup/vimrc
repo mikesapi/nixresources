@@ -1,0 +1,129 @@
+""""""""""""""""""""""""""""""""""""""""""""""
+" Genearl settings
+
+" Forces vim to source .vimrc file if it is present in working directory
+set exrc
+
+" Restrict usage of some commands in non-default .vimrc files
+set secure
+
+" Pathogen
+execute pathogen#infect()
+
+" Generate helptags for everything in 'runtimepath'
+call pathogen#helptags()
+
+" Try to detect filetypes
+filetype on
+
+" Disable vi compatibility (emulation of old bugs)
+set nocompatible
+
+" Syntax highlighing
+syntax on
+
+" This enables automatic indentation as you type
+filetype indent on
+
+" Use intelligent indentation for C
+set smartindent
+
+" Format and autocomplete insertion of comments
+set formatoptions+=rco
+
+" Highlight matching braces
+set showmatch
+
+" Enter spaces when tab is pressed
+set expandtab
+
+" Use 2 spaces to represent tab
+set tabstop=2
+set softtabstop=2
+
+" Copy indent from current line when starting a new line
+set autoindent
+
+" Number of spaces to use for auto indent
+set shiftwidth=2
+
+" Custom display of all characters
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+" Make backspaces more powerfull
+set backspace=indent,eol,start
+
+" Show curser line and column number in the bottom right corner
+set ruler
+
+" Show (partial) command in status line
+set showcmd
+
+" Display line numbers on the left side
+set number
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" Let vim know that these file types should be read like cpp files
+autocmd BufNewFile,BufReadPost *.tpp,*.tcu set filetype=cpp
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Enhanced keyboard mappings
+
+" Save all and make
+nnoremap <F2> :wall <bar> make -j4<CR>
+inoremap <F2> <ESC> :wall <bar> make -j4<CR>
+
+" Switch between header and cpp files
+map <F6> :call CurtineIncSw()<CR>
+
+" Goto definition with F12
+map <F12> <C-]>
+
+" Save all and make
+nnoremap <C-p> :wall <bar> make -j4<CR>
+nnoremap m :wall <bar> make -j4<CR>
+inoremap <C-p> <ESC> :wall <bar> make -j4<CR>
+
+" Nerdtree toggle
+map <C-n> :NERDTreeToggle<CR>
+
+" Save all and quit
+nnoremap <C-x> :wall <bar> qall<CR>
+
+" Save all
+inoremap jk <ESC> :wall<CR>
+inoremap <C-y> <ESC> :wall<CR>
+noremap <C-y> :wall<CR>
+
+" Switch buffers
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Custom functions
+
+" Removes trailing spaces
+ function TrimWhiteSpace()
+   %s/\s*$//
+   ''
+ :endfunction
+command TrimWhiteSpace execute TrimWhiteSpace() 
+
+" Check spelling with aspell
+function CheckSpelling()
+  !aspell --lang=en_GB -t -c "%"
+:endfunction
+command CheckSpelling execute CheckSpelling()
