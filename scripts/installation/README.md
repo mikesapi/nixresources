@@ -20,7 +20,7 @@ A convenient script to install all your favorite packages after a fresh install.
 #
 # Then:
 # sudo apt-get install git
-# git clone git@github.com:mikesapi/nixresources.git
+# git clone https://github.com/mikesapi/nixresources.git
 # cd nixresources/scripts/tools
 # ./add-tools-path-to-bashrc.sh
 # source ~/.bashrc
