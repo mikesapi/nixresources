@@ -4,7 +4,7 @@ echo "[main] ...Checking dependencies..."
 PKGSTOINSTALL=""
 for var in "$@"
 do
-  if [[ ! `dpkg -l | grep -w "ii  $var"` ]]
+  if [[ ! `dpkg -l | grep -w "ii  $var "` ]]
   then
     echo "[main] ...$var... MISSING"
     PKGSTOINSTALL="$PKGSTOINSTALL $var"

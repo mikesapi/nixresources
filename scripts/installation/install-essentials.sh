@@ -42,7 +42,7 @@ samba
 
 echo "Adjust colour temperature of screen..."
 install-packages.sh \
-geoclue \
+geoclue-2.0 \
 redshift \
 redshift-gtk
 
@@ -61,7 +61,7 @@ meld \
 octave \
 r-base-dev \
 r-cran-ggplot2 \
-vim-gnome
+vim
 
 echo "Other essential packages..."
 install-packages.sh \
