@@ -2,7 +2,31 @@
 
 # This script allows you to backup the git repositories listed in repos.txt
 
-for repourl in `sed '/^[$#]/d' repos.txt`; do
+function help {
+  echo ""
+  echo "Usage: ./git-backup [path-to-repos.txt]"
+  echo "add --lfs if you have repos which use git lfs."
+  echo "Example 1: ./git-backup path/to/repos.txt"
+  echo "Example 2: ./git-backup path/to/repos.txt --lfs"
+  echo ""
+}
+
+if [ $# -lt 1 ]
+then
+  help
+  exit
+fi
+
+if [ ! -f $1 ]
+then
+  echo "$1 does not exist"
+  help
+  exit
+fi
+
+src=$1
+
+for repourl in `sed '/^[$#]/d' $src`; do
 
   reponamedotgit=${repourl##*/}
   reponame=${reponamedotgit%%.*}
@@ -25,6 +49,10 @@ for repourl in `sed '/^[$#]/d' repos.txt`; do
   fi
 
   git clone $repourl
+  if [[ "$@" == "--lfs" ]]
+  then
+    git lfs fetch --all
+  fi
   zip -rm $reponame.zip $reponame
 
   if [ -f $reponame.zip ]

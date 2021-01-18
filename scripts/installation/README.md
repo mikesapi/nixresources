@@ -43,11 +43,13 @@ install-packages.sh \
 nfs-common \
 nis \
 openssh-server \
+cifs-utils \
+net-tools \
 samba
 
 echo "Adjust colour temperature of screen..."
 install-packages.sh \
-geoclue \
+geoclue-2.0 \
 redshift \
 redshift-gtk
 
@@ -66,10 +68,13 @@ meld \
 octave \
 r-base-dev \
 r-cran-ggplot2 \
-vim-gnome
+vim \
+tmux \
+xclip
 
 echo "Other essential packages..."
 install-packages.sh \
+locate \
 evince \
 gimp gimp-data gimp-plugin-registry gimp-data-extras \
 gnome-session-flashback \

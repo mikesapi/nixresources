@@ -19,7 +19,7 @@ fi
 src=$1 
 dst=$2
 
-includes='--include=".git/" --include=".git*" --include=".vim/" --include=".vim*" --include=".keep*"'
+includes='--include=".git/" --include=".git*" --include=".vim/" --include=".vim*" --include=".keep*" --include=".task/"'
 excludes='--exclude=".*" --exclude="./*" --exclude="build/" --exclude="libraries/" --exclude="3rdparty/" --exclude="*.tags"'
 delete='--delete --delete-excluded'
 

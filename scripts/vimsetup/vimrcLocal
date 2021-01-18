@@ -1,8 +1,5 @@
-" Set path to makefile
-set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ build/
-
 " Settings for grep
-set grepprg=grep\ -nrI\ --exclude-dir={.git,build,libraries,3rdparty}\ --exclude=*tags
+set grepprg=grep\ -nrI\ --exclude-dir={.git,build,third_party,local,install}\ --exclude=tags\ --exclude=local.tags\ $*
 
 " recreate tags file with F5
 map <F5> :GenerateTags<CR>
@@ -12,6 +9,6 @@ set tags+=local.tags
 
 " function to create tags file for local code
 function GenerateTags()
-  !ctags -R --sort=yes --langmap=C++:+.cu --c++-kinds=+p --fields=+iaS --extra=+qf --exclude=.git --exclude=build --exclude=libraries --exclude=3rdparty --exclude=cmake -f ./local.tags .
+  !rm -rf ./local.tags && ctags -R -f ./local.tags .
 endfunction
 command GenerateTags execute GenerateTags()

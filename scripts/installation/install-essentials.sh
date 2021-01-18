@@ -15,7 +15,7 @@
 #
 # Then:
 # sudo apt-get install git
-# git clone git@github.com:mikesapi/nixresources.git
+# git clone https://github.com/mikesapi/nixresources.git
 # cd nixresources/scripts/tools
 # ./add-tools-path-to-bashrc.sh
 # source ~/.bashrc
@@ -38,6 +38,8 @@ install-packages.sh \
 nfs-common \
 nis \
 openssh-server \
+cifs-utils \
+net-tools \
 samba
 
 echo "Adjust colour temperature of screen..."
@@ -61,10 +63,13 @@ meld \
 octave \
 r-base-dev \
 r-cran-ggplot2 \
-vim
+vim \
+tmux \
+xclip
 
 echo "Other essential packages..."
 install-packages.sh \
+locate \
 evince \
 gimp gimp-data gimp-plugin-registry gimp-data-extras \
 gnome-session-flashback \

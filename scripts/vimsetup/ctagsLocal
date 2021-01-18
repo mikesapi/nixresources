@@ -1,0 +1,9 @@
+--recurse=yes
+--tag-relative=yes
+--langmap=C++:+.cu
+--c++-kinds=+p
+--fields=+iaS
+--extra=+qf
+--exclude=.git
+--exclude=build
+--exclude=cmake

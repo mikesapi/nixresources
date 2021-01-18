@@ -13,23 +13,18 @@ execute pathogen#infect()
 " Generate helptags for everything in 'runtimepath'
 call pathogen#helptags()
 
-" Try to detect filetypes
-filetype on
+" Turn on filetype plugins, indentation and filetype detection
+filetype plugin indent on
 
 " Disable vi compatibility (emulation of old bugs)
 set nocompatible
 
 " Syntax highlighing
+colorscheme desert
 syntax on
-
-" This enables automatic indentation as you type
-filetype indent on
 
 " Use intelligent indentation for C
 set smartindent
-
-" Format and autocomplete insertion of comments
-set formatoptions+=rco
 
 " Highlight matching braces
 set showmatch
@@ -65,7 +60,7 @@ set number
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
+set grepprg=grep\ -nrI\ $*
 
 " Let vim know that these file types should be read like cpp files
 autocmd BufNewFile,BufReadPost *.tpp,*.tcu set filetype=cpp
@@ -86,13 +81,16 @@ inoremap <F2> <ESC> :wall <bar> make -j4<CR>
 " Switch between header and cpp files
 map <F6> :call CurtineIncSw()<CR>
 
+" Toggle highlighting on/off
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
 " Goto definition with F12
 map <F12> <C-]>
 
 " Save all and make
-nnoremap <C-p> :wall <bar> make -j4<CR>
+nnoremap <C-p> :wall <bar> :ALEToggle<CR>
 nnoremap m :wall <bar> make -j4<CR>
-inoremap <C-p> <ESC> :wall <bar> make -j4<CR>
+inoremap <C-p> <ESC> :wall <bar> :ALEToggle<CR>
 
 " Nerdtree toggle
 map <C-n> :NERDTreeToggle<CR>
@@ -100,8 +98,11 @@ map <C-n> :NERDTreeToggle<CR>
 " Save all and quit
 nnoremap <C-x> :wall <bar> qall<CR>
 
+" Esc
+inoremap jk <ESC>
+inoremap kj <ESC>
+
 " Save all
-inoremap jk <ESC> :wall<CR>
 inoremap <C-y> <ESC> :wall<CR>
 noremap <C-y> :wall<CR>
 
@@ -110,6 +111,7 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""

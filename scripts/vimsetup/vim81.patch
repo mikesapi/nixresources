@@ -1,0 +1,26 @@
+From 2e981ac89020b70948ea338aa1172c273ecafb8f Mon Sep 17 00:00:00 2001
+From: Michael Sapienza <michael@3starlabs.com>
+Date: Thu, 30 Apr 2020 17:29:23 -0700
+Subject: [PATCH] changing search background color to blue for desert color
+ scheme
+
+---
+ runtime/colors/desert.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/runtime/colors/desert.vim b/runtime/colors/desert.vim
+index 7166220f2..ded60f67b 100644
+--- a/runtime/colors/desert.vim
++++ b/runtime/colors/desert.vim
+@@ -73,7 +73,7 @@ hi NonText	cterm=bold ctermfg=darkblue
+ hi Directory	ctermfg=darkcyan
+ hi ErrorMsg	cterm=bold ctermfg=7 ctermbg=1
+ hi IncSearch	cterm=NONE ctermfg=yellow ctermbg=green
+-hi Search	cterm=NONE ctermfg=grey ctermbg=blue
++hi Search	cterm=NONE ctermfg=grey ctermbg=darkblue
+ hi MoreMsg	ctermfg=darkgreen
+ hi ModeMsg	cterm=NONE ctermfg=brown
+ hi LineNr	ctermfg=3
+-- 
+2.17.1
+
