@@ -48,7 +48,7 @@ for repourl in `sed '/^[$#]/d' $src`; do
     mv $reponame.zip $reponame.zip.backup
   fi
 
-  git clone $repourl
+  git clone --recurse-submodules $repourl
   if [[ "$@" == "--lfs" ]]
   then
     git lfs fetch --all
