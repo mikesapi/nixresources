@@ -58,14 +58,24 @@ install-packages.sh \
 cmake \
 cmake-curses-gui \
 exuberant-ctags \
-git gitk \
+git gitg \
 meld \
 octave \
 r-base-dev \
 r-cran-ggplot2 \
 vim \
+python3-venv \
 tmux \
 xclip
+
+echo "Required for compiling vim from source with --with-x support..."
+install-packages.sh \
+libx11-dev \
+libice-dev \
+libsm-dev \
+libxtst-dev \
+libxt-dev
+
 
 echo "Other essential packages..."
 install-packages.sh \
