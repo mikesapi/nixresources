@@ -60,7 +60,7 @@ set number
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
-set grepprg=grep\ -nrI\ $*
+set grepprg=grep\ -nrI\ --exclude-dir={.git,build,third_party,local,install}\ --exclude=tags\ --exclude=local.tags\ $*
 
 " Let vim know that these file types should be read like cpp files
 autocmd BufNewFile,BufReadPost *.tpp,*.tcu set filetype=cpp
@@ -83,6 +83,18 @@ map <F6> :call CurtineIncSw()<CR>
 
 " Toggle highlighting on/off
 :noremap <F4> :set hlsearch! hlsearch?<CR>
+
+:nnoremap <F7> "=strftime("%Y-%m-%d")<CR>P
+:inoremap <F7> <C-R>=strftime("%Y-%m-%d")<CR>
+
+" Toggle paste on/off
+:noremap <F8> :set paste! paste?<CR>
+
+" Copy and paste
+vmap <C-c> "+y
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 
 " Goto definition with F12
 map <F12> <C-]>
@@ -112,7 +124,18 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+""""""""""""""""""""""""""""""""""""""""""""""
+" append local tags
+set tags+=local.tags
 
+" recreate tags file with F5
+map <F5> :GenerateTags<CR>
+
+" function to create tags file for local code
+function GenerateTags()
+  !rm -rf ./local.tags && ctags -R -f ./local.tags .
+endfunction
+command GenerateTags execute GenerateTags()
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Custom functions
@@ -129,3 +152,10 @@ function CheckSpelling()
   !aspell --lang=en_GB -t -c "%"
 :endfunction
 command CheckSpelling execute CheckSpelling()
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" VimWiki options
+let wiki_1 = {}
+let wiki_1.path = '~/documents/notes/'
+let wiki_1.ext = 'wiki'
+let g:vimwiki_list = [wiki_1]

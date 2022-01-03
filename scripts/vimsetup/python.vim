@@ -9,3 +9,5 @@ let b:ale_fixers = ['autopep8']
 let b:ale_warn_about_trailing_whitespace = 1
 let g:ale_set_quickfix = 1
 let g:ale_enabled = 0
+
+let g:pydocstring_formatter = 'numpy'

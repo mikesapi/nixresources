@@ -2,8 +2,8 @@
 
 vimsetup=$(pwd)
 
-# Install Vim 8.1
-vimversion=v8.1.0000
+# Install Vim
+vimversion=v8.2.0000
 softwaredir=$HOME/software
 if [ ! -d $softwaredir/vim/.git ]; then
   echo "Installing vim $vimversion"
@@ -12,7 +12,12 @@ if [ ! -d $softwaredir/vim/.git ]; then
   cd $softwaredir/vim
   git checkout $vimversion
   git am $vimsetup/vim81.patch
-  ./configure
+  vimflags=""
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    vimflags="$vimflags --with-x"
+  fi
+  echo "using vim configure flags: $vimflags"
+  ./configure $vimflags
   make -j4
   sudo make install
   cd $vimsetup
@@ -23,20 +28,29 @@ fi
 dest=$HOME
 vimdir=.vim
 
-if [ -d $dest/$vimdir ]; then
-  echo "A ~/.vim folder already exists, exiting.."
-  echo "Delete or move .vim before running this script"
-  exit
-fi
-
 if [ -f $dest/.vimrc ]; then
   echo "A .vimrc file already exists, exiting.."
   echo "Delete or move .vimrc before running this script"
   exit
 fi
 
+if [ -f $dest/.ctags ]; then
+  echo "A .ctags file already exists, exiting.."
+  echo "Delete or move .vimrc before running this script"
+  exit
+fi
+
+if [ -d $dest/$vimdir ]; then
+  echo "A ~/.vim folder already exists, exiting.."
+  echo "Delete or move .vim before running this script"
+  exit
+fi
+
 echo "Copying vimrc to ~/.vimrc"
 cp vimrc $dest/.vimrc
+
+echo "Installing local ctags settings.."
+cp ctagsLocal $dest/.ctags
 
 echo "Installing vim pathogen and packages.."
 cd $dest
@@ -51,6 +65,13 @@ git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/ericcurtin/CurtineIncSw.vim.git
 git clone https://github.com/w0rp/ale.git
 git clone https://github.com/christoomey/vim-tmux-navigator.git
+git clone https://github.com/vimwiki/vimwiki.git
+
+git clone https://github.com/heavenshell/vim-pydocstring
+cd vim-pydocstring
+git am $vimsetup/vim-pydocstring.patch
+make install
+cd ..
 
 echo "Installing ftplugins.."
 mkdir -p $dest/$vimdir/ftplugin

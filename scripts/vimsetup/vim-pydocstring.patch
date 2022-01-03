@@ -1,0 +1,25 @@
+From ab16544defb7b6f532b184bb813bd1e4f68f96c8 Mon Sep 17 00:00:00 2001
+From: Michael Sapienza <michael@3starlabs.com>
+Date: Tue, 26 Jan 2021 17:41:44 -0800
+Subject: [PATCH] swapping C-l for F3
+
+---
+ ftplugin/python/pydocstring.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ftplugin/python/pydocstring.vim b/ftplugin/python/pydocstring.vim
+index 21cf5b0..886b0b9 100644
+--- a/ftplugin/python/pydocstring.vim
++++ b/ftplugin/python/pydocstring.vim
+@@ -20,7 +20,7 @@ command! -buffer -nargs=0 PydocstringFormat call pydocstring#format()
+ nnoremap <silent> <buffer> <Plug>(pydocstring) :call pydocstring#insert()<CR>
+ if get(g:, 'pydocstring_enable_mapping', 1)
+   if !hasmapto('<Plug>(pydocstring)', 'n')
+-    nmap <silent> <buffer> <C-l> <Plug>(pydocstring)
++    nmap <silent> <buffer> <F3> <Plug>(pydocstring)
+   endif
+ endif
+ 
+-- 
+2.17.1
+
