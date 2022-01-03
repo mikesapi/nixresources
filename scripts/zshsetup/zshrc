@@ -102,3 +102,4 @@ source $ZSH/oh-my-zsh.sh
 unsetopt share_history
 
 alias filecount='find . -type f | cut -d/ -f2 | sort | uniq -c | sort -nr'
+alias tn="vim ~/documents/notes/index.wiki"
