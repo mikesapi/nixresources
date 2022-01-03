@@ -3,12 +3,13 @@
 # Check the input.
 function help {
   echo ""
-  echo "Stack (vertical) all .mp4s in a directory."
+  echo "Stack (horizontal by default) all .mp4s in a directory."
   echo "Usage: ./hstack_mp4_dir.sh [path/to/dir] [output.mp4]"
+  echo "Usage: ./hstack_mp4_dir.sh [path/to/dir] [output.mp4] -vertical"
   echo ""
 }
 
-if [ $# -ne 2 ]
+if [ $# -lt 2 ]
 then
   help
   exit
@@ -28,7 +29,6 @@ then
   exit
 fi
 
-
 indir=$1
 outfile=$2
 args=()
@@ -42,6 +42,12 @@ do
   let COUNTER=COUNTER+1
 done
 
-cmd="ffmpeg ${args} -filter_complex \"${args2}vstack=inputs=${COUNTER}\" ${outfile}"
+if [[ "$3" == "--vertical" ]]
+then
+  cmd="ffmpeg ${args} -filter_complex \"${args2}vstack=inputs=${COUNTER}\" ${outfile}"
+else
+  cmd="ffmpeg ${args} -filter_complex \"${args2}hstack=inputs=${COUNTER}\" ${outfile}"
+fi
+
 echo $cmd
 eval "$cmd"

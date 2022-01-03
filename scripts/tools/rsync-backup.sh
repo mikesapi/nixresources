@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#! /bin/bash -e
 
 # Check the input
 function help {

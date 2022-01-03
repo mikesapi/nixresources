@@ -1,5 +1,7 @@
 #! /bin/bash -e
 
+# Note install the following: install-packages.sh lm-sensors sysbench
+
 echo "****************************************************"
 echo "## Starting the benchmark and temperature monitoring"
 timestamp=$(date +%Y-%m-%d--%H-%M-%S)
