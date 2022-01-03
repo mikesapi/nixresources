@@ -1,0 +1,6 @@
+#This is a test file
+/path/to/file/to/remove1.txt
+/long/path/to/file/to/remove2.txt
+
+# This is a comment.
+/path/to/file/to/remove3.txt
