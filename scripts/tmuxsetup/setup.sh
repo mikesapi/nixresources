@@ -10,6 +10,12 @@ if [ -d $dest/$tmuxdir ]; then
   exit
 fi
 
+if [ -f $dest/.tmux.conf.local ]; then
+  echo "A .tmux.conf.local file already exists, exiting.."
+  echo "Delete or move .tmux.conf before running this script"
+  exit
+fi
+
 if [ -f $dest/.tmux.conf ]; then
   echo "A .tmux.conf file already exists, exiting.."
   echo "Delete or move .tmux.conf before running this script"
@@ -17,12 +23,7 @@ if [ -f $dest/.tmux.conf ]; then
 fi
 
 echo "Copying tmux.conf to ~/.tmux.conf"
-cp tmux.conf $dest/.tmux.conf
-
-echo "Installing tmux package manager.."
 cd $dest
-git clone https://github.com/tmux-plugins/tpm $dest/.tmux/plugins/tpm
-
-# On launching tmux for the first time:
-# Press prefix + I (capital i, as in Install) to fetch the plugin.
-# Make sure you've actually saved a session (prefix + ctrl-s) before trying to restore (prefix + ctrl-r).
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp $tmuxsetup/tmux.conf.local .tmux.conf.local
